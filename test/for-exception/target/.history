@@ -1,0 +1,22 @@
+run
+ls
+compile
+run
+reload
+run
+compile
+build
+help
+run
+exit
+compile
+build
+compile
+build
+compile
+reload
+compile
+run
+run-main
+run-main Main
+run

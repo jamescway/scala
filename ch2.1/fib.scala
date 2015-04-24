@@ -4,21 +4,15 @@
 
 
 object Fibonacci {
-  def start(n: Int) = {
-
+  def go(n: Int) = {
     def fib(idx: Int, fib_current: Int = 1, fib_previous: Int = 0) : Int = {
-      if(idx == 1){
-        return fib_current
-      }
-
+      if(idx == 1) return fib_current
       fib(idx - 1, fib_current + fib_previous, fib_current)
     }
-
-    val output = fib(n)
-    s"nth number is: $output"
+    fib(n)
   }
 
   def main(args: Array[String]) {
-    println(start(7))
+    println(go(8))
   }
 }
