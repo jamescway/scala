@@ -100,12 +100,19 @@ trait Stream[+A] {
     }
   }
 
-  def zipAll[B](s2: Stream[B]): Stream[(Option[A],Option[B])] = {
+  // def zipAll[B](s2: Stream[B]): Stream[(Option[A],Option[B])] = {
 
-  }
+  // }
 
-  def startsWith[A](s: Stream[A]): Boolean = {
+  // def startsWith[A](s: Stream[A]): Boolean = {
 
+  // }
+
+  def tails: Stream[Stream[A]] = {
+    unfold(this){
+      case Cons(h,t) => Some((cons(h(), t()), t()))
+      case _ => None
+    } append(Stream(empty))
   }
 
 }
@@ -264,8 +271,14 @@ class StreamSpec extends FunSpec {
     }
   }
   describe("5.14") {
-    it("startsWith should work"){
-      assert(Stream(1,2,3,4).startsWith(Stream(1,2)) == true)
+    // it("startsWith should work"){
+    //   assert(Stream(1,2,3,4).startsWith(Stream(1,2)) == true)
+    // }
+  }
+  describe("5.15") {
+    it("tails should work") {
+      assert(Stream(1,2,3).tails.append(empty).map(_.toList).toList == List(List(1,2,3), List(2,3), List(3), List()) )
+      assert(Stream(Stream(1), empty).take(2).map(_.toList).toList == List(List(1), List()) )
     }
   }
 
