@@ -33,6 +33,10 @@ object RNG {
     ((x+1).toDouble / Int.MaxValue, nextRNG)
   }
 
+  def boolean(rng: RNG): (Boolean, RNG) =
+    rng.nextInt match { case (i,rng2) => (i%2==0,rng2) }
+
+
   def intDouble(rng: RNG): ((Int,Double), RNG) = {
     val (i, nextRNG1) = nonNegativeInt(rng)
     val (d, nextRNG2) = double(nextRNG1)
@@ -62,7 +66,7 @@ object RNG {
     else {
       List(x)
     }
-    (lizst, nextRng)
+    (lizst, rng2)
   }
 
   def double_with_map(rng: RNG): Rand[Double] =
